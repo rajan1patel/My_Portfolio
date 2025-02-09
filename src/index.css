@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+  
+  /* box-sizing: border-box; */
+  /* background: transparent; */
+}
+body{
+  font-family: 'Outfit';
+  height: 100vh;
+  color: white;
+  background-color: rgb(10, 30, 30);
+}
