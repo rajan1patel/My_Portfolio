@@ -8,7 +8,7 @@ import project_4 from './project_4.svg';
 import project_3 from './project_3.svg';
 import project_2 from './project_2.svg';
 import project_1 from './project_1.svg';
-import profile_img from './profile_img.svg';
+import profile_img from './main_img.png';
 import nav_underline from './nav_underline.svg';
 import menu_open from './menu_open.svg';
 import menu_close from './menu_close.svg';
