@@ -7,11 +7,27 @@ import Service from './components/Service/Service'
 import MyWork from './components/Mywork/MyWork'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
+import { motion } from 'framer-motion';
+
 function App() {
- 
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
   return (
-   <div>
+   <motion.div
+     initial="hidden"
+     animate="visible"
+     variants={containerVariants}
+   >
     <Navbar></Navbar>
     <Hero></Hero>
     <About></About>
@@ -19,7 +35,7 @@ function App() {
     <MyWork></MyWork>
     <Contact></Contact>
     <Footer></Footer>
-   </div>
+   </motion.div>
   )
 }
 

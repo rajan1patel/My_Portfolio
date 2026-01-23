@@ -12,15 +12,22 @@ const Service = () => {
       </div>
       <div className="services-container">
         {Services_Data.map((service,index)=>{
-            return <div  key={index}className="services-format">
+            return <a 
+              key={index}
+              href={service.doc_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="services-format"
+              style={{textDecoration: 'none', color: 'inherit'}}
+            >
 <h3>{service.s_no}</h3>
 <h2>{service.s_name}</h2>
 <p>{service.s_desc}</p>
 <div className="services-readmore">
-    <p>ReadMore</p>
+    <p>Read More</p>
     <img src={assets.arrow_icon} alt="" />
 </div>
-            </div>
+            </a>
         })}
       </div>
     </div>

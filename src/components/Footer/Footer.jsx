@@ -1,36 +1,80 @@
 import React from 'react'
 import './Footer.css'
 import { assets } from '../../assets/assests'
+import { motion } from 'framer-motion';
+
 const Footer = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 15, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <div className='footer' >
-      <div className="footer-top">
-        <div className="footer-top-left">
+    <motion.div
+      className='footer scroll-reveal'
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.div
+        className="footer-top"
+        variants={containerVariants}
+      >
+        <motion.div
+          className="footer-top-left"
+          variants={itemVariants}
+        >
             {/* <img src={assets.footer_logo} alt="" />
              */}
               <h2>Rajan</h2>
               <img src={assets.nav_underline} alt="underline" />
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo amet mollitia beatae deleniti porro repellat!</p>
-        </div>
-        <div className="footer-top-right">
+            <p>Full Stack Developer crafting secure, scalable solutions. From auth flows to cloud deployments, I build products that matter.</p>
+        </motion.div>
+        <motion.div
+          className="footer-top-right"
+          variants={itemVariants}
+        >
             <div className="footer-email-input">
                 <img src={assets.user_icon
                 } alt="" />
                 <input type="email" placeholder=" enter your email"name="" id="" />
             </div>
             <div className="footer-subscribe">Subscribe</div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       <hr />
-      <div className="footer-bottom">
-        <p className='footer-bottom-left'>All rights Reversed</p>
+      <motion.div
+        className="footer-bottom"
+        variants={containerVariants}
+      >
+        <p className='footer-bottom-left'>© 2026 Rajan Patel. All rights reserved.</p>
         <div className="footer-bottom-right">
-            <p>Terms Of Services</p>
-            <p>Terms Of Services</p>
-            <p>Terms Of Services</p>
+            <p>LinkedIn</p>
+            <p>GitHub</p>
+            <p>Twitter</p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

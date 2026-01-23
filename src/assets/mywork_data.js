@@ -8,32 +8,32 @@ import project6_img from './project_6.svg'
 const mywork_data = [
     {
         w_no:1,
-        w_name:"Web design",
+        w_name:"Exam Seat Allocation System",
         w_img:project1_img
     },
     {
         w_no:2,
-        w_name:"Web design",
+        w_name:"MockGenie - AI Interview Prep",
         w_img:project2_img
     },
     {
         w_no:3,
-        w_name:"Web design",
+        w_name:"Connectify - Social Network",
         w_img:project3_img
     },
     {
         w_no:4,
-        w_name:"Web design",
+        w_name:"SvaraAI Platform",
         w_img:project4_img
     },
     {
         w_no:5,
-        w_name:"Web design",
+        w_name:"AWS DevOps Pipeline",
         w_img:project5_img
     },
     {
         w_no:6,
-        w_name:"Web design",
+        w_name:"WordPress Sites",
         w_img:project6_img
     },
 ]

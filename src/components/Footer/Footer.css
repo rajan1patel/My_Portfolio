@@ -62,3 +62,45 @@
 .footer-email-input:hover{
     border: 2px solid white;
 }
+
+@media (max-width: 1024px){
+    .footer{
+        margin: 40px 60px 80px;
+    }
+    .footer-top{
+        gap: 24px;
+    }
+}
+
+@media (max-width: 720px){
+    .footer{
+        margin: 30px 24px 60px;
+    }
+    .footer-top{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .footer-top-right{
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .footer-email-input{
+        width: 100%;
+    }
+    .footer-subscribe{
+        width: 100%;
+        text-align: center;
+    }
+    .footer-bottom{
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .footer-bottom-right{
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+}

@@ -24,21 +24,29 @@
 }
 .mywork-container{
     display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 20px;
 }
 .mywork-container img{
     box-sizing: border-box;
     width: 300px;
     height: 200px;
     cursor: pointer;
-}
-.mywork-container img:hover{
-    transform: scale(1.10);
-    border: 2px solid red;
+    transition: all 0.4s ease;
     border-radius: 10px;
-    transition: 0.3s;
-
+    position: relative;
+}
+.mywork-container img.active:nth-child(1){animation-delay:0.05s;}
+.mywork-container img.active:nth-child(2){animation-delay:0.1s;}
+.mywork-container img.active:nth-child(3){animation-delay:0.15s;}
+.mywork-container img.active:nth-child(4){animation-delay:0.2s;}
+.mywork-container img.active:nth-child(5){animation-delay:0.25s;}
+.mywork-container img.active:nth-child(6){animation-delay:0.3s;}
+.mywork-container img:hover{
+    box-shadow: 0 20px 40px rgba(223, 137, 8, 0.3), 0 0 20px rgba(180, 21, 255, 0.2);
+    border: 2px solid #df8908;
+    border-radius: 10px;
 }
 .mywork-showmore{
     display: flex;
@@ -56,4 +64,37 @@ gap: 20px;
 .mywork-showmore:hover{
     gap: 30px;
     transition: 0.3s;
+}
+
+@media (max-width: 1024px){
+    .mywork{
+        margin: 60px 60px;
+        gap: 60px;
+    }
+    .mywork-container{
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    .mywork-title h1{
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 720px){
+    .mywork{
+        margin: 50px 30px;
+        gap: 50px;
+    }
+    .mywork-container{
+        grid-template-columns: 1fr;
+    }
+    .mywork-container img{
+        width: 100%;
+        height: auto;
+    }
+    .mywork-showmore{
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
 }
