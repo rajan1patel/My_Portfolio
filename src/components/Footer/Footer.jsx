@@ -50,17 +50,7 @@ const Footer = () => {
               <img src={assets.nav_underline} alt="underline" />
             <p>Full Stack Developer crafting secure, scalable solutions. From auth flows to cloud deployments, I build products that matter.</p>
         </motion.div>
-        <motion.div
-          className="footer-top-right"
-          variants={itemVariants}
-        >
-            <div className="footer-email-input">
-                <img src={assets.user_icon
-                } alt="" />
-                <input type="email" placeholder=" enter your email"name="" id="" />
-            </div>
-            <div className="footer-subscribe">Subscribe</div>
-        </motion.div>
+       
       </motion.div>
       <hr />
       <motion.div
