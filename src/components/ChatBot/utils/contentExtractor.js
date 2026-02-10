@@ -1,8 +1,17 @@
+let cachedPageContent = null;
+
 /**
  * Extracts all visible text content from the page
+ * @param {Object} options
+ * @param {boolean} options.forceRefresh
  * @returns {string} The visible text content of the page
  */
-export const extractPageContent = () => {
+export const extractPageContent = (options = {}) => {
+  const { forceRefresh = false } = options;
+
+  if (!forceRefresh && cachedPageContent) {
+    return cachedPageContent;
+  }
   // Get all visible elements that contain text
   const allTextElements = document.querySelectorAll(`
     h1, h2, h3, h4, h5, h6, p, span, div, li, a, strong, em, 
@@ -49,8 +58,22 @@ export const extractPageContent = () => {
     ...texts,
     ...sectionContents
   ].join('\n\n');
-  
-  return allContent;
+
+  cachedPageContent = allContent;
+  return cachedPageContent;
+};
+
+export const warmPageContentCache = () => {
+  cachedPageContent = extractPageContent({ forceRefresh: true });
+  if (cachedPageContent) {
+    const preview = cachedPageContent.slice(0, 200);
+    console.log('[ChatBot] Cached page content:', {
+      length: cachedPageContent.length,
+      preview
+    });
+  } else {
+    console.warn('[ChatBot] No page content cached.');
+  }
 };
 
 /**

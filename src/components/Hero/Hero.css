@@ -60,18 +60,32 @@
     border-radius:50px ;
     background: linear-gradient(270deg,#DF8908 10%,#B415FF 100%);
     cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    display: inline-block;
 }
 .hero-resume{
     padding: 25px 75px;
     border-radius: 50px;
     border: 2px solid white;
     cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    display: inline-block;
 }
 .hero-connect:hover{
     border: 2px solid white;
+    transform: scale(1.05);
 }
 .hero-resume:hover{
- border-color: purple;
+    border-color: #df8908;
+    transform: scale(1.05);
 }
 
 @media (max-width: 1024px){

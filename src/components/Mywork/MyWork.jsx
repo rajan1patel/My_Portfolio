@@ -64,27 +64,34 @@ const MyWork = () => {
           variants={containerVariants}
         >
             {mywork_data.map((work,index)=>{
-                return <motion.img
+                return <motion.a
                   key={index}
-                  src={work.w_img}
+                  href={work.w_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variants={workItemVariants}
                   whileHover={{
                     scale: 1.15,
                     y: -10,
                     transition: { duration: 0.4, ease: "easeOut" }
                   }}
-                  style={{ zIndex: 1 }}
-                />
+                  style={{ zIndex: 1, display: 'block' }}
+                >
+                  <img src={work.w_img} alt={work.w_name} />
+                </motion.a>
 
             })}
         </motion.div>
-        <motion.div
+        <motion.a
+          href="https://github.com/rajan1patel?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
           className="mywork-showmore"
           variants={itemVariants}
         >
             <p>Show MORE</p>
           <img src={assets.arrow_icon} alt="" />
-        </motion.div>
+        </motion.a>
 
     </motion.div>
   )

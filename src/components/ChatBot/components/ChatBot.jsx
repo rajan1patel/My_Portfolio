@@ -54,6 +54,16 @@ const ChatBot = () => {
           content: `Action completed: ${toolResult}`
         };
         setMessages(prev => [...prev, toolResultMessage]);
+        
+        // If there's a companion message from AI, show it after tool execution
+        if (response.companionMessage) {
+          const companionMsg = {
+            id: Date.now() + 2,
+            type: 'bot',
+            content: response.companionMessage
+          };
+          setMessages(prev => [...prev, companionMsg]);
+        }
       } else {
         // Add bot message
         const botMessage = {

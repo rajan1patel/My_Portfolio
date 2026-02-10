@@ -15,10 +15,22 @@ class GeminiAPIService {
         Current Page Content: ${pageContent}
         User says: "${userMessage}"
         
-        Rules:
-        1. If navigating: {"type": "tool", "tool": "navigate", "args": {"sectionId": "..."}}
-        2. If answering: {"type": "message", "content": "..."}
-        Valid sectionIds: home, About, Services, Portfolio, Contact
+        Available tools:
+        1. navigate - Go to a section: {"type": "tool", "tool": "navigate", "args": {"sectionId": "home|About|Services|Portfolio|Contact"}}
+        2. scroll - Scroll page: {"type": "tool", "tool": "scroll", "args": {"direction": "up|down"}}
+        3. click - Click element: {"type": "tool", "tool": "click", "args": {"selector": "CSS_SELECTOR"}}
+        4. highlight - Highlight element: {"type": "tool", "tool": "highlight", "args": {"selector": "CSS_SELECTOR"}}
+        5. input - Fill input: {"type": "tool", "tool": "input", "args": {"selector": "CSS_SELECTOR", "text": "..."}}
+        
+        Common selectors:
+        - Resume button: .hero-resume
+        - Connect button: .hero-connect
+        - Contact form name: input[name="name"]
+        - Contact form email: input[name="email"]
+        
+        Response format:
+        - Tool call: {"type": "tool", "tool": "TOOL_NAME", "args": {...}}
+        - Message: {"type": "message", "content": "..."}
       `;
 
       const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
@@ -53,9 +65,34 @@ class GeminiAPIService {
       // Robust JSON Parsing
       try {
         const cleaned = aiResponse.replace(/```json|```/g, '').trim();
-        return JSON.parse(cleaned);
+        const parsed = JSON.parse(cleaned);
+        
+        // Handle array response (multiple items)
+        if (Array.isArray(parsed)) {
+          // If array has multiple items, combine tool with message
+          const toolItem = parsed.find(item => item.type === 'tool');
+          const messageItem = parsed.find(item => item.type === 'message');
+          
+          if (toolItem && messageItem) {
+            // Return tool with companion message
+            return {
+              ...toolItem,
+              companionMessage: messageItem.content
+            };
+          } else if (toolItem) {
+            return toolItem; // Tool only
+          } else if (messageItem) {
+            return messageItem; // Message only
+          } else {
+            return { type: 'message', content: 'Received response but could not parse.' };
+          }
+        }
+        
+        // Single object response
+        return parsed;
       } catch (e) {
         // Fallback if AI returns plain text despite JSON mode
+        console.error('JSON parse error:', e);
         return { type: 'message', content: aiResponse };
       }
     } catch (error) {
