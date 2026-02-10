@@ -1,8 +1,39 @@
-# React + Vite
+# Rajan Patel's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my portfolio website! This is a showcase of my skills, projects, and experience as a Full Stack Developer.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Modern, responsive design
+- Smooth animations and transitions
+- Project showcase
+- Contact form
+- AI-powered co-browsing chatbot assistant
+
+## AI Chatbot Assistant
+
+This portfolio includes an AI-powered co-browsing chatbot that can help visitors navigate and understand the content. The chatbot uses Google's Gemini API to understand user queries and interact with the portfolio through a tool-calling architecture.
+
+To configure the chatbot with your own API key, see the ChatBot_README.md file.
+
+## Technologies Used
+
+- React
+- Vite
+- Framer Motion (for animations)
+- CSS
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open your browser to the provided URL
+
+## Deployment
+
+This project is ready for deployment on platforms like Vercel, Netlify, or similar.
+
+## Contact
+
+Feel free to reach out through the contact form on the website!

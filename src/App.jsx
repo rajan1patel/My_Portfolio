@@ -7,7 +7,13 @@ import Service from './components/Service/Service'
 import MyWork from './components/Mywork/MyWork'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
+import ChatBot from './components/ChatBot'
+import { getGeminiService, actionExecutor } from './components/ChatBot/setup'; // Import to initialize services
 import { motion } from 'framer-motion';
+
+// Initialize services when the app loads
+getGeminiService();
+actionExecutor;
 
 function App() {
 
@@ -35,6 +41,7 @@ function App() {
     <MyWork></MyWork>
     <Contact></Contact>
     <Footer></Footer>
+    <ChatBot />
    </motion.div>
   )
 }
