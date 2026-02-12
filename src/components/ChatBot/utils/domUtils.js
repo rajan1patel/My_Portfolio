@@ -149,6 +149,10 @@ export const input = ({ selector, text }) => {
     const event = new Event('input', { bubbles: true });
     element.dispatchEvent(event);
     
+    // Trigger change event for form libraries
+    const changeEvent = new Event('change', { bubbles: true });
+    element.dispatchEvent(changeEvent);
+    
     return `Inputted text "${text}" into element with selector: ${selector}`;
   } else if (element) {
     throw new Error(`Element with selector "${selector}" is not an input or textarea`);

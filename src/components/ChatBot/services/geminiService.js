@@ -27,9 +27,11 @@ class GeminiAPIService {
         - Connect button: .hero-connect
         - Contact form name: input[name="name"]
         - Contact form email: input[name="email"]
+        - Contact form message: textarea[name="message"]
         
         Response format:
         - Tool call: {"type": "tool", "tool": "TOOL_NAME", "args": {...}}
+        - Multiple tool calls (in order): [{"type": "tool", ...}, {"type": "tool", ...}]
         - Message: {"type": "message", "content": "..."}
       `;
 
@@ -69,23 +71,22 @@ class GeminiAPIService {
         
         // Handle array response (multiple items)
         if (Array.isArray(parsed)) {
-          // If array has multiple items, combine tool with message
-          const toolItem = parsed.find(item => item.type === 'tool');
-          const messageItem = parsed.find(item => item.type === 'message');
-          
-          if (toolItem && messageItem) {
-            // Return tool with companion message
+          const toolItems = parsed.filter(item => item?.type === 'tool');
+          const messageItem = parsed.find(item => item?.type === 'message');
+
+          if (toolItems.length > 0) {
             return {
-              ...toolItem,
-              companionMessage: messageItem.content
+              type: 'tool_batch',
+              tools: toolItems,
+              companionMessage: messageItem?.content
             };
-          } else if (toolItem) {
-            return toolItem; // Tool only
-          } else if (messageItem) {
-            return messageItem; // Message only
-          } else {
-            return { type: 'message', content: 'Received response but could not parse.' };
           }
+
+          if (messageItem) {
+            return messageItem; // Message only
+          }
+
+          return { type: 'message', content: 'Received response but could not parse.' };
         }
         
         // Single object response

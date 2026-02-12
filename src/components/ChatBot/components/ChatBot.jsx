@@ -44,10 +44,9 @@ const ChatBot = () => {
       const response = await geminiService.sendMessage(inputValue);
       
       if (response.type === 'tool') {
-        // Execute the tool and get the result
+        // Execute single tool
         const toolResult = await actionExecutor.execute(response.tool, response.args);
         
-        // Add tool result message
         const toolResultMessage = {
           id: Date.now() + 1,
           type: 'bot',
@@ -55,7 +54,35 @@ const ChatBot = () => {
         };
         setMessages(prev => [...prev, toolResultMessage]);
         
-        // If there's a companion message from AI, show it after tool execution
+        if (response.companionMessage) {
+          const companionMsg = {
+            id: Date.now() + 2,
+            type: 'bot',
+            content: response.companionMessage
+          };
+          setMessages(prev => [...prev, companionMsg]);
+        }
+      } else if (response.type === 'tool_batch') {
+        // Execute multiple tools sequentially
+        let executionSummary = [];
+        for (const tool of response.tools) {
+          try {
+            const toolResult = await actionExecutor.execute(tool.tool, tool.args);
+            executionSummary.push(`✓ ${tool.tool}: ${toolResult}`);
+            // Add small delay between tool executions to allow form state updates
+            await new Promise(resolve => setTimeout(resolve, 200));
+          } catch (error) {
+            executionSummary.push(`✗ ${tool.tool}: ${error.message}`);
+          }
+        }
+        
+        const toolResultMessage = {
+          id: Date.now() + 1,
+          type: 'bot',
+          content: `Actions completed:\n${executionSummary.join('\n')}`
+        };
+        setMessages(prev => [...prev, toolResultMessage]);
+        
         if (response.companionMessage) {
           const companionMsg = {
             id: Date.now() + 2,
